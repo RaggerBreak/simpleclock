@@ -4,21 +4,107 @@
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
-<body>
-    <h1>Simpleclock</h1>
+<body onload="lublinTime()">
+    <h1>Simple clock</h1>
     <div>
         <h3>Lublin</h3>
-        <p th:text="${lublin}"></p>
+        <p th:text="${lublin.toLocalDate()}"></p>
+        <div id="lublinClock"></div>
     </div>
     <div>
         <h3>New York</h3>
-        <p th:text="${newYork}"></p>
+        <p th:text="${newYork.toLocalDate()}"></p>
+        <div id="newYorkClock"></div>
     </div>
     <div>
         <h3>Sydney</h3>
-        <p th:text="${sydney}"></p>
+        <p th:text="${sydney.toLocalDate()}"></p>
+        <div id="sydneyClock"></div>
     </div>
 
+<!--    LUBLIN-->
+    <script th:inline="javascript">
+
+        var inputLu = {
+            year: 0,
+            month: 0,
+            day: 0,
+
+            /*<![CDATA[*/
+            hours: /*[[${lublin.getHour()}]]*/ '0',
+            minutes: /*[[${lublin.getMinute()}]]*/ '0',
+            seconds: /*[[${lublin.getSecond()}]]*/ '0'
+            /*]]>*/
+
+        };
+
+        var timestampLu = new Date(inputLu.year, inputLu.month, inputLu.day,
+            inputLu.hours, inputLu.minutes, inputLu.seconds);
+
+        var interval = 1;
+
+        setInterval(function () {
+            timestampLu = new Date(timestampLu.getTime() + interval * 1000);
+            document.getElementById('lublinClock').innerHTML = timestampLu.toLocaleTimeString();
+        }, Math.abs(interval) * 1000);
+
+    </script>
+
+<!--    NEW YORK-->
+    <script th:inline="javascript">
+
+        var inputNY = {
+            year: 0,
+            month: 0,
+            day: 0,
+
+            /*<![CDATA[*/
+            hours: /*[[${newYork.getHour()}]]*/ '0',
+            minutes: /*[[${newYork.getMinute()}]]*/ '0',
+            seconds: /*[[${newYork.getSecond()}]]*/ '0'
+            /*]]>*/
+
+        };
+
+        var timestampNY = new Date(inputNY.year, inputNY.month, inputNY.day,
+            inputNY.hours, inputNY.minutes, inputNY.seconds);
+
+        var interval = 1;
+
+        setInterval(function () {
+            timestampNY = new Date(timestampNY.getTime() + interval * 1000);
+            document.getElementById('newYorkClock').innerHTML = timestampNY.toLocaleTimeString();
+        }, Math.abs(interval) * 1000);
+
+    </script>
+
+    <!--    SYDNEY-->
+    <script th:inline="javascript">
+
+        var inputSY = {
+            year: 0,
+            month: 0,
+            day: 0,
+
+            /*<![CDATA[*/
+            hours: /*[[${sydney.getHour()}]]*/ '0',
+            minutes: /*[[${sydney.getMinute()}]]*/ '0',
+            seconds: /*[[${sydney.getSecond()}]]*/ '0'
+            /*]]>*/
+
+        };
+
+        var timestampSY = new Date(inputSY.year, inputSY.month, inputSY.day,
+            inputSY.hours, inputSY.minutes, inputSY.seconds);
+
+        var interval = 1;
+
+        setInterval(function () {
+            timestampSY = new Date(timestampSY.getTime() + interval * 1000);
+            document.getElementById('sydneyClock').innerHTML = timestampSY.toLocaleTimeString();
+        }, Math.abs(interval) * 1000);
+
+    </script>
 
 </body>
 </html>

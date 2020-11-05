@@ -5,9 +5,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.TimeZone;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+
 
 @RequiredArgsConstructor
 @Controller
@@ -15,21 +15,14 @@ public class MainController {
 
     @GetMapping("/")
     public String homePage(Model model) {
-        Date date = new Date();
 
-        SimpleDateFormat lublin = new SimpleDateFormat("dd-MM-yyy HH:mm");
-        SimpleDateFormat newYork = new SimpleDateFormat("dd-MM-yyy HH:mm");
-        SimpleDateFormat sydney = new SimpleDateFormat("dd-MM-yyy HH:mm");
+        ZonedDateTime lublin = ZonedDateTime.now(ZoneId.of("Europe/Warsaw"));
+        ZonedDateTime newYork = ZonedDateTime.now(ZoneId.of("America/New_York"));
+        ZonedDateTime sydney = ZonedDateTime.now(ZoneId.of("Australia/Sydney"));
 
-        lublin.setTimeZone(TimeZone.getTimeZone("Europe/Warsaw"));
-        newYork.setTimeZone(TimeZone.getTimeZone("America/New_York"));
-        sydney.setTimeZone(TimeZone.getTimeZone("Australia/Sydney"));
-
-        model.addAttribute("lublin", lublin.format(date));
-        model.addAttribute("newYork", newYork.format(date));
-        model.addAttribute("sydney", sydney.format(date));
-
-        System.out.println(lublin.getDateFormatSymbols());
+        model.addAttribute("lublin", lublin);
+        model.addAttribute("newYork", newYork);
+        model.addAttribute("sydney", sydney);
 
         return "index";
     }
