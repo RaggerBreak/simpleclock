@@ -1,5 +1,8 @@
 # simpleclock
 
+## Studies
+PwChO: 1
+
 ### Docker
 
 Build: `docker build https://github.com/RaggerBreak/simpleclock.git -t simpleclock`
